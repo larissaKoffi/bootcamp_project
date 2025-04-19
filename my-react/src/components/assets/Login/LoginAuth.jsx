@@ -1,6 +1,8 @@
 import React from 'react';
-import './LoginRegister.css';
-const LoginRegister = () => {
+import { Link } from 'react-router-dom';
+import './LoginAuth.css'
+import { FaUser, FaLock } from "react-icons/fa";
+const Login = () => {
     return(
         <div className='wrapper'>
             <div className="form-box login">
@@ -8,17 +10,19 @@ const LoginRegister = () => {
                     <h1>login</h1>
                     <div className="input-box">
                         <input type="text"placeholder='Username' required />
+                        <FaUser className='icon' />
                     </div>
                     <div className="input-box">
                         <input type="password"placeholder='Password' required />
+                        <FaLock className='icon' />
                     </div>
                     <div className="remenber-forget">
                         <label> <input type="checkbox"/>Remenber me</label>
-                        <a href="#">Forget Password?</a>
+                        <Link to="#">Forget Password?</Link>
                     </div>
                     <button type="submit">Login</button>
                     <div className="register-link">
-                        <p>Don't have account? <a href="#">Register</a></p>
+                        <p>Don't have account? <Link to="register">Register</Link></p>
                     </div>
                 </form>
 
@@ -27,4 +31,4 @@ const LoginRegister = () => {
     );
 };
 
-export default LoginRegister;
+export default Login;
