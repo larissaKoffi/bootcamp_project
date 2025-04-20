@@ -17,7 +17,7 @@ const Login = () => {
                     <button class="opacity">SE CONNECTER</button>
                 </form>
                 <div class="register-forget opacity">
-                  <Link to="/register">INS</Link>
+                  <Link to="/register">INSCRIPTION</Link>
                   <Link to="#">FORGOT PASSWORD</Link>
                 </div>
             </div>
