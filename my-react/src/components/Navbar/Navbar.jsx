@@ -6,6 +6,8 @@ function Navbar() {
   return (
     
     <>
+  
+
     <div className="navbar">
         <Link to="/">Home</Link>
         <Link to="/login">Deconnexion</Link>
