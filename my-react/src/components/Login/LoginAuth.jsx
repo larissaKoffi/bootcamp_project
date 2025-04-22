@@ -1,32 +1,80 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import './LoginAuth.css';
 
-const Login = () => {
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:8000/api/login/', {
+        email,
+        password,
+      });
+
+      console.log("Connexion réussie :", response.data);
+      alert("Connexion réussie !");
+
+      //redirection
+    const { token, role } = response.data;
+
+    localStorage.setItem('token', token);
+    localStorage.setItem('role', role);
+
+    if (role === 'admin') {
+      navigate('/admin');
+    } else {
+      navigate('/home');
+    }
+    } catch (error) {
+      console.error("Erreur lors de la connexion :", error.response?.data || error);
+      alert(error.response?.data?.detail || "Email/password Incorrect.");
+    }
+  };
+
   return (
-    <>
-      <section class="container">
-        <div class="login-container">
-            <div class="circle circle-one"></div>
-            <div class="form-container">
-                <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
-                <h1 class="opacity">CONNEXION</h1>
-                <form>
-                    <input type='email' placeholder="EMAIL" />
-                    <input type="password" placeholder="PASSWORD" />
-                    <button class="opacity">SE CONNECTER</button>
-                </form>
-                <div class="register-forget opacity">
-                  <Link to="/register">INSCRIPTION</Link>
-                  <Link to="#">FORGOT PASSWORD</Link>
-                </div>
-            </div>
-            <div class="circle circle-two"></div>
+    <section className="container">
+      <div className="login-container">
+        <div className="circle circle-one"></div>
+        <div className="form-container">
+          <img
+            src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png"
+            alt="illustration"
+            className="illustration"
+          />
+          <h1 className="opacity">CONNEXION</h1>
+          <form onSubmit={handleLogin}>
+            <input
+              type='email'
+              placeholder="EMAIL"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="PASSWORD"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button type="submit" className="opacity">SE CONNECTER</button>
+          </form>
+          <div className="register-forget opacity">
+            <Link to="/register">INSCRIPTION</Link>
+            <Link to="#">MOT DE PASSE OUBLIÉ</Link>
+          </div>
         </div>
-        <div class="theme-btn-container"></div>
+        <div className="circle circle-two"></div>
+      </div>
+      <div className="theme-btn-container"></div>
     </section>
-    </>
   );
-};
+}
 
 export default Login;

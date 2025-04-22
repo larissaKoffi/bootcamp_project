@@ -1,11 +1,11 @@
 import React from 'react';
-import './HomePage.css'
 import Navbar from '../Navbar/Navbar';
 
 function HomePage() {
   return (
     <>
-      <Navbar />
+    <Navbar />
+    <div>Ceci est la pge après connexion</div>
     </>
   );
 }
