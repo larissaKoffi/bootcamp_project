@@ -6,7 +6,6 @@ from .serializers import RegisterSerializer
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
-from .permissions import IsAdmin
 
 class RegisterView(APIView):
     def post(self, request):
