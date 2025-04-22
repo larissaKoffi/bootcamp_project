@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function Register() {
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [errors, setErrors] = useState({});
