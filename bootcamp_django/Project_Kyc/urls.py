@@ -17,7 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('api/', include('users.urls')),
+# ]
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('users.urls')),
+    path('api/', include('users.urls')),  # Inclut les URLs définies dans users/urls.py
+    path('api/pieces/', include('identites.urls')),  # Inclut les URLs définies dans identites/urls.py
 ]
+
+# Pour servir les fichiers médias pendant le développement
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
