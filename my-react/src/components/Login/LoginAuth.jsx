@@ -20,17 +20,16 @@ function Login() {
       console.log("Connexion réussie :", response.data);
       alert("Connexion réussie !");
 
-      //redirection
-    const { token, role } = response.data;
+      const { token, role } = response.data;
 
-    localStorage.setItem('token', token);
-    localStorage.setItem('role', role);
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
 
-    if (role === 'admin') {
-      navigate('/admin');
-    } else {
-      navigate('/home');
-    }
+      if (role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/home');
+      }
     } catch (error) {
       console.error("Erreur lors de la connexion :", error.response?.data || error);
       alert(error.response?.data?.detail || "Email/password Incorrect.");
@@ -38,42 +37,48 @@ function Login() {
   };
 
   return (
-    <section className="container">
-      <div className="login-container">
-        <div className="circle circle-one"></div>
-        <div className="form-container">
-          <img
-            src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png"
-            alt="illustration"
-            className="illustration"
+    <div className="wrapper">
+      <div className="title">Connexion</div>
+      <form onSubmit={handleLogin}>
+        <div className="field">
+          <input
+            type="email"
+            placeholder="EMAIL"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
-          <h1 className="opacity">CONNEXION</h1>
-          <form onSubmit={handleLogin}>
-            <input
-              type='email'
-              placeholder="EMAIL"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              placeholder="PASSWORD"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <button type="submit" className="opacity">SE CONNECTER</button>
-          </form>
-          <div className="register-forget opacity">
-            <Link to="/register">INSCRIPTION</Link>
-            <Link to="#">MOT DE PASSE OUBLIÉ</Link>
+        </div>
+
+        <div className="field">
+          <input
+            type="password"
+            placeholder="PASSWORD"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="content">
+          <div className="checkbox">
+            <input type="checkbox" id="remember-me" />
+            <label htmlFor="remember-me">Remember me</label>
+          </div>
+          <div className="pass-link">
+            <Link to="#">Forgot password?</Link>
           </div>
         </div>
-        <div className="circle circle-two"></div>
-      </div>
-      <div className="theme-btn-container"></div>
-    </section>
+
+        <div className="field">
+          <button type="submit" className="submit-btn">SE CONNECTER</button>
+        </div>
+
+        <div className="signup-link">
+          Pas encore inscrit ? <Link to="/register">Inscription</Link>
+        </div>
+      </form>
+    </div>
   );
 }
 

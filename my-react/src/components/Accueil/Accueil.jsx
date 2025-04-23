@@ -1,6 +1,7 @@
 import React from 'react';
 import './Accueil.css';
 import { Link } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 import { FaCamera, FaBrain, FaCheckCircle, FaFileExport, FaArrowRight, FaUserPlus, FaSignInAlt } from 'react-icons/fa';
 
 function Accueil() {
@@ -23,9 +24,22 @@ function Accueil() {
           
           <ul className="nav-links">
             <li><Link to="/" className="nav-link active">Accueil</Link></li>
-            <li><Link to="/features" className="nav-link">Fonctionnalités</Link></li>
-            <li><Link to="/how-it-works" className="nav-link">Comment ça marche</Link></li>
-            <li><Link to="/contact" className="nav-link">Contact</Link></li>
+              <li>
+                <ScrollLink to="features" smooth={true} duration={500} className="nav-link">
+                    <Link to="#features" className="nav-link">Fonctionnalités</Link>
+                  </ScrollLink>
+              </li>
+            <li>
+              <ScrollLink to="how-it-works" smooth={true} duration={500} className="nav-link">
+                  <Link to="#how-it-works" className="nav-link">Comment ça marche</Link>
+              </ScrollLink>
+            </li>
+
+            {/* <li>
+              <ScrollLink to="contact" smooth={true} duration={500} className="nav-link">
+                <Link to="#contact" className="nav-link">Contact</Link>
+              </ScrollLink>
+            </li> */}
           </ul>
           
           <div className="auth-buttons">
@@ -51,10 +65,10 @@ function Accueil() {
               en quelques secondes, avec une précision inégalée.
             </p>
             <div className="hero-cta">
-              <Link to="/upload" className="cta-primary">
+              <Link to="/register" className="cta-primary">
                 Essayer maintenant <FaArrowRight className="cta-icon" />
               </Link>
-              <Link to="/demo" className="cta-secondary">
+              <Link to="/register" className="cta-secondary">
                 Voir la démo
               </Link>
             </div>
@@ -65,18 +79,13 @@ function Accueil() {
               <div className="card-overlay">
                 <div className="scan-line"></div>
               </div>
-              <div className="data-points">
-                {[...Array(8)].map((_, i) => (
-                  <div key={i} className="data-point" style={{ '--delay': i * 0.1 + 's' }}></div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section avec cartes animées */}
-      <section className="features-section">
+      <section id="features"  className="features-section">
         <div className="section-container">
           <div className="section-header">
             <h2 className="section-title">Fonctionnalités clés</h2>
@@ -84,7 +93,7 @@ function Accueil() {
             <div className="divider"></div>
           </div>
           
-          <div className="features-grid">
+          <div  className="features-grid">
             <div className="feature-card">
               <div className="feature-icon-container">
                 <FaCamera className="feature-icon" />
@@ -133,7 +142,7 @@ function Accueil() {
       </section>
 
       {/* Process Section avec timeline moderne */}
-      <section className="process-section">
+      <section id='how-it-works' className="process-section">
         <div className="section-container">
           <div className="section-header">
             <h2 className="section-title">Comment ça marche</h2>
@@ -185,11 +194,6 @@ function Accueil() {
               <div className="timeline-image">
                 <div className="verify-animation">
                   <div className="checkmark"></div>
-                  <div className="data-fields">
-                    {[...Array(5)].map((_, i) => (
-                      <div key={i} className="data-field"></div>
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>
@@ -214,69 +218,8 @@ function Accueil() {
         </div>
       </section>
 
-      {/* Upload Section avec drag & drop visuel */}
-      <section className="upload-section">
-        <div className="section-container">
-          <div className="upload-container">
-            <h2 className="upload-title">Prêt à essayer ?</h2>
-            <p className="upload-subtitle">Téléversez votre première pièce d'identité</p>
-            
-            <div className="upload-box">
-              <div className="upload-icon-container">
-                <div className="upload-icon-animated">
-                  <div className="upload-cloud"></div>
-                  <div className="upload-arrow"></div>
-                </div>
-              </div>
-              <p className="upload-instruction">Glissez-déposez votre fichier ici ou</p>
-              <label htmlFor="file-upload" className="upload-btn">
-                Parcourir les fichiers
-              </label>
-              <input id="file-upload" type="file" accept="image/*" className="file-input" />
-              <p className="upload-hint">Formats supportés: JPG, PNG, PDF (max. 10MB)</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer élégant */}
       <footer className="app-footer">
-        <div className="footer-container">
-          <div className="footer-main">
-            <div className="footer-brand">
-              <h3 className="footer-logo">ID<span>Extract</span></h3>
-              <p className="footer-tagline">L'extraction intelligente pour l'ère numérique</p>
-              <div className="footer-social">
-                <Link to="#" className="social-icon">Twitter</Link>
-                <Link to="#" className="social-icon">LinkedIn</Link>
-                <Link to="#" className="social-icon">GitHub</Link>
-              </div>
-            </div>
-            
-            <div className="footer-links">
-              <div className="link-group">
-                <h4 className="link-title">Produit</h4>
-                <Link to="/features" className="footer-link">Fonctionnalités</Link>
-                <Link to="/pricing" className="footer-link">Tarifs</Link>
-                <Link to="/updates" className="footer-link">Nouveautés</Link>
-              </div>
-              
-              <div className="link-group">
-                <h4 className="link-title">Ressources</h4>
-                <Link to="/documentation" className="footer-link">Documentation</Link>
-                <Link to="/api" className="footer-link">API</Link>
-                <Link to="/help" className="footer-link">Aide</Link>
-              </div>
-              
-              <div className="link-group">
-                <h4 className="link-title">Entreprise</h4>
-                <Link to="/about" className="footer-link">À propos</Link>
-                <Link to="/careers" className="footer-link">Carrières</Link>
-                <Link to="/contact" className="footer-link">Contact</Link>
-              </div>
-            </div>
-          </div>
-          
           <div className="footer-bottom">
             <p className="copyright">&copy; {new Date().getFullYear()} IDExtract. Tous droits réservés.</p>
             <div className="legal-links">
@@ -284,7 +227,6 @@ function Accueil() {
               <Link to="/terms" className="legal-link">Conditions</Link>
               <Link to="/cookies" className="legal-link">Cookies</Link>
             </div>
-          </div>
         </div>
       </footer>
     </div>
