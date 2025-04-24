@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import Register from './components/Register/registerAuth';
 import Login from './components/Login/LoginAuth';
 import AdminDash from './components/Admin/AdminDash';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -14,8 +15,15 @@ function App() {
         <Route path='/home' element={<HomePage />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/admin' element={<AdminDash />} />
         <Route path='#' element={<Navbar />} />
+        <Route
+          path='/admin'
+          element={
+            <PrivateRoute>
+              <AdminDash />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );

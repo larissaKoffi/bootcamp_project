@@ -17,19 +17,21 @@ function Login() {
         password,
       });
 
+
       console.log("Connexion réussie :", response.data);
       alert("Connexion réussie !");
 
-      const { token, role } = response.data;
+      //redirection
+    const { token, role } = response.data;
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('role', role);
+    localStorage.setItem('token', token);
+    localStorage.setItem('role', role);
 
-      if (role === 'admin') {
-        navigate('/admin');
-      } else {
-        navigate('/home');
-      }
+    if (role === 'admin') {
+      navigate('/admin');
+    } else {
+      navigate('/home');
+    }
     } catch (error) {
       console.error("Erreur lors de la connexion :", error.response?.data || error);
       alert(error.response?.data?.detail || "Email/password Incorrect.");
@@ -37,48 +39,52 @@ function Login() {
   };
 
   return (
-    <div className="wrapper">
-      <div className="title">Connexion</div>
-      <form onSubmit={handleLogin}>
-        <div className="field">
-          <input
-            type="email"
-            placeholder="EMAIL"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+    <>
 
-        <div className="field">
-          <input
-            type="password"
-            placeholder="PASSWORD"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="content">
-          <div className="checkbox">
-            <input type="checkbox" id="remember-me" />
-            <label htmlFor="remember-me">Remember me</label>
+    <div class="wrapper">
+            <div class="title">
+                Connexion
+            </div>
+            <form onSubmit={handleLogin}>
+                <div class="field">
+                <input
+              type='email'
+              placeholder="EMAIL"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <label>Email Address</label>
+                </div>
+                <div class="field">
+                <input
+              type="password"
+              placeholder="PASSWORD"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+                  <label>Password</label>
+                </div>
+                <div class="content">
+                  <div class="checkbox">
+                      <input type="checkbox" id="remember-me" />
+                      <label for="remember-me">Remember me</label>
+                  </div>
+                  <div class="pass-link">
+                    <Link to="#">Forgot password?</Link>
+                  </div>
+                </div>
+                <div class="field">
+                  <input type="submit" value="Login" />
+                </div>
+                <div class="signup-link">
+                  Pas Inscrire? <Link to="/register">Inscription</Link>
+                </div>
+            </form>
           </div>
-          <div className="pass-link">
-            <Link to="#">Forgot password?</Link>
-          </div>
-        </div>
-
-        <div className="field">
-          <button type="submit" className="submit-btn">SE CONNECTER</button>
-        </div>
-
-        <div className="signup-link">
-          Pas encore inscrit ? <Link to="/register">Inscription</Link>
-        </div>
-      </form>
-    </div>
+        
+    </>
   );
 }
 

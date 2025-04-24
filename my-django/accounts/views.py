@@ -57,5 +57,3 @@ class ProfileView(APIView):
         serializer = RegisterSerializer(user)
         return Response(serializer.data)
     
-
-
