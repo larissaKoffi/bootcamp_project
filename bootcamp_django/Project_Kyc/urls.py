@@ -27,8 +27,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('users.urls')),  # Inclut les URLs définies dans users/urls.py
-    path('api/pieces/', include('users.urls')),  # Inclut les URLs définies dans identites/urls.py
+    path('api/', include('users.urls')),
+    path('api/pieces/', include('users.urls')), 
 ]
 
 # Pour servir les fichiers médias pendant le développement
